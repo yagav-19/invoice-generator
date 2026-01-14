@@ -34,7 +34,7 @@ function InvoiceForm({ onGenerate }) {
   );
 
   const generateInvoice = async () => {
-    await axios.post("http://localhost:5000/api/invoice", {
+    await axios.post("https://invoice-generator-efaa.onrender.com/api/invoice", {
       customer,
       products,
     });
