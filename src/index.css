@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-bright-bg text-slate-800 font-sans antialiased;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(33, 115, 154, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(85, 40, 190, 0.1) 0%, transparent 40%);
+    background-attachment: fixed;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-soft-gray;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800/20 rounded-full hover:bg-solar-blue/50 transition-colors;
+}
