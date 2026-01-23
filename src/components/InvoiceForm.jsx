@@ -42,13 +42,17 @@ function InvoiceForm({ onGenerate }) {
       return;
     }
     if (products.some(p => !p.name.trim() || p.qty <= 0)) {
-      alert("⚠️ Please fill in all product details (Name and Qty > 0).");
       return;
     }
 
     setLoading(true);
     try {
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+      // Automatically switch based on environment
+      const API_URL = import.meta.env.MODE === "development"
+        ? "http://localhost:5000"
+        : "https://invoice-generator-efaa.onrender.com";
+
       const response = await axios.post(`${API_URL}/api/invoice`, {
         customer,
         products,
