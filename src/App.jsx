@@ -21,11 +21,9 @@ function App() {
 
           <h1 className="text-4xl md:text-6xl font-bold text-center mb-10 tracking-tight font-sans">
             <span className="bg-gradient-to-r from-solar-blue via-slate-800 to-solar-purple bg-clip-text text-transparent drop-shadow-sm">
-              ASTRO BILLING
+               INVOICE GENERATOR
             </span>
-            <span className="block text-sm md:text-base font-normal text-slate-500 mt-2 font-mono tracking-widest uppercase">
-              Holographic Invoice Generator
-            </span>
+            
           </h1>
 
           <div className="relative z-10">

@@ -14,10 +14,27 @@ app.use(cors());
 app.use(express.json());
 
 // ✅ CONNECT MONGODB
+// ✅ CONNECT MONGODB
+// ✅ CONNECT MONGODB & START SERVER
+if (!process.env.MONGO_URI) {
+  console.error("❌ FATAL ERROR: MONGO_URI is missing in environment variables!");
+  process.exit(1);
+}
+
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Local Connected"))
-  .catch((err) => console.log("MongoDB Error:", err));
+  .then(() => {
+    console.log("✅ MongoDB Connected Successfully");
+    // Only start server if DB connects
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB Connection Error:", err);
+    process.exit(1);
+  });
 
 // ✅ TEST ROUTE
 app.get("/", (req, res) => {
@@ -25,7 +42,9 @@ app.get("/", (req, res) => {
 });
 
 // ✅ SAVE INVOICE
+// ✅ SAVE INVOICE
 app.post("/api/invoice", async (req, res) => {
+  console.log("📥 Received Invoice Data:", req.body); // DEBUG LOG
   try {
     const invoice = new Invoice(req.body);
     await invoice.save();
@@ -43,10 +62,4 @@ app.get("/api/invoice", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
-
-// ✅ START SERVER
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
 });
